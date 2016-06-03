@@ -14,8 +14,8 @@ depends=('crypto++' 'freeimage' 'fuse')
 makedepends=('git')
 conflicts=('megafuse')
 provides=('megafuse')
-source=("git://github.com/matteoserva/MegaFuse.git" "https://raw.githubusercontent.com/sta1us/mega/master/file_cache_row.cpp.patch")
-md5sums=("SKIP" "SKIP")
+source=("git://github.com/matteoserva/MegaFuse.git")
+md5sums=("SKIP")
 
 pkgver() {
   cd "MegaFuse"
@@ -24,11 +24,16 @@ pkgver() {
 
 prepare() {
   cd "MegaFuse/src"
-  patch -p0 < "$startdir/file_cache_row.cpp.patch"
+  sed -i -e 's/<unistd.h>/<unistd.h>\n#include <cmath>/' file_cache_row.cpp
 }
 
 build() {
   cd "MegaFuse"
+  case ${CARCH} in
+     x86_64 )
+           sed -i -e 's/CPPFLAGS = /CPPFLAGS = -m64 /' Makefile
+           ;;
+  esac
   make
 }
 
