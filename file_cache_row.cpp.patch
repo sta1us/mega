@@ -1,0 +1,10 @@
+--- file_cache_row.cpp	2016-06-03 20:11:39.629279917 +0500
++++ file_cache_row.cpp.new	2016-06-03 20:14:22.117428876 +0500
+@@ -6,6 +6,7 @@
+ #include <fcntl.h>
+ #include <stdlib.h>
+ #include <unistd.h>
++#include <cmath>
+ 
+ #include <megaclient.h>
+ #include <sys/stat.h>
