@@ -14,13 +14,17 @@ depends=('crypto++' 'freeimage' 'fuse')
 makedepends=('git')
 conflicts=('megafuse')
 provides=('megafuse')
-source=('git://github.com/matteoserva/MegaFuse.git')
+source=('git://github.com/matteoserva/MegaFuse.git', 'https://raw.githubusercontent.com/sta1us/mega/master/file_cache_row.cpp.patch')
 md5sums=('SKIP')
 
 pkgver() {
   cd "MegaFuse"
   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
+
+prepare() {
+  cd "MegaFuse/src"
+  patch -p0 < $startdir/file_cache_row.cpp.patch}
 
 build() {
   cd "MegaFuse"
