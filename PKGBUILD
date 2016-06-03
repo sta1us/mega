@@ -14,8 +14,8 @@ depends=('crypto++' 'freeimage' 'fuse')
 makedepends=('git')
 conflicts=('megafuse')
 provides=('megafuse')
-source=('git://github.com/matteoserva/MegaFuse.git', 'https://raw.githubusercontent.com/sta1us/mega/master/file_cache_row.cpp.patch')
-md5sums=('SKIP')
+source=("git://github.com/matteoserva/MegaFuse.git" "https://raw.githubusercontent.com/sta1us/mega/master/file_cache_row.cpp.patch")
+md5sums=("SKIP" "SKIP")
 
 pkgver() {
   cd "MegaFuse"
@@ -24,7 +24,8 @@ pkgver() {
 
 prepare() {
   cd "MegaFuse/src"
-  patch -p0 < $startdir/file_cache_row.cpp.patch}
+  patch -p0 < "$startdir/file_cache_row.cpp.patch"
+}
 
 build() {
   cd "MegaFuse"
